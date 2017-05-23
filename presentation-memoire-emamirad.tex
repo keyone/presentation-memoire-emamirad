@@ -1,98 +1,36 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Beamer Presentation
-% LaTeX Template
-% Version 1.0 (10/11/12)
-%
-% This template has been downloaded from:
-% http://www.LaTeXTemplates.com
-%
-% License:
-% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES AND THEMES
-%----------------------------------------------------------------------------------------
-
-\documentclass{beamer}
+% !TEX root
+% !TEX encoding = UTF-8 Unicode
+% -*- coding: UTF-8; -*-
+% vim: set fenc=utf-8
+\documentclass[french]{beamer}
 
 \mode<presentation> {
-
-% The Beamer class comes with a number of default slide themes
-% which change the colors and layouts of slides. Below this is a list
-% of all the themes, uncomment each in turn to see what they look like.
-
-%\usetheme{default}
-%\usetheme{AnnArbor}
-%\usetheme{Antibes}
-%\usetheme{Bergen}
-%\usetheme{Berkeley}
-%\usetheme{Berlin}
-%\usetheme{Boadilla}
-%\usetheme{CambridgeUS}
-%\usetheme{Copenhagen}
-%\usetheme{Darmstadt}
-%\usetheme{Dresden}
-%\usetheme{Frankfurt}
-%\usetheme{Goettingen}
-%\usetheme{Hannover}
-%\usetheme{Ilmenau}
-%\usetheme{JuanLesPins}
-%\usetheme{Luebeck}
-\usetheme{Madrid}
-%\usetheme{Malmoe}
-%\usetheme{Marburg}
-%\usetheme{Montpellier}
-%\usetheme{PaloAlto}
-%\usetheme{Pittsburgh}
-%\usetheme{Rochester}
-%\usetheme{Singapore}
-%\usetheme{Szeged}
-%\usetheme{Warsaw}
-
-% As well as themes, the Beamer class has a number of color themes
-% for any slide theme. Uncomment each of these in turn to see how it
-% changes the colors of your current slide theme.
-
-%\usecolortheme{albatross}
-%\usecolortheme{beaver}
-%\usecolortheme{beetle}
-%\usecolortheme{crane}
-%\usecolortheme{dolphin}
-%\usecolortheme{dove}
-%\usecolortheme{fly}
-%\usecolortheme{lily}
-%\usecolortheme{orchid}
-%\usecolortheme{rose}
-%\usecolortheme{seagull}
-%\usecolortheme{seahorse}
-%\usecolortheme{whale}
-%\usecolortheme{wolverine}
-
-%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
-%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
-
-%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+\usetheme{Boadilla}
+\usecolortheme{seahorse}
+\setbeamertemplate{footline}[page number]
+\setbeamertemplate{navigation symbols}{}
 }
 
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage[french]{babel} % Pour écrire en français
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 
-%----------------------------------------------------------------------------------------
-%	TITLE PAGE
-%----------------------------------------------------------------------------------------
+\uselanguage{French}
+\languagepath{French}
 
-\title[Short title]{Full Title of the Talk} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Lattice Miner]{Conception et implémentation de nouvelles fonctionnalités dans un prototype de fouille de données} % The short title appears at the bottom of every slide, the full title is only on the title page
 
-\author{John Smith} % Your name
-\institute[UCLA] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+\author{Kévin Emamirad} % Your name
+\institute[UQO] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
-University of California \\ % Your institution for the title page
+Université du Québec en Outaouais \\ % Your institution for the title page
+Département d’informatique et d’ingénierie \\
 \medskip
-\textit{john@smith.com} % Your email address
+\textit{emak01@uqo.ca} % Your email address
 }
-\date{\today} % Date, can be changed to a custom date
+\date{mercredi 31 mai 2017} % Date, can be changed to a custom date
 
 \begin{document}
 
@@ -101,22 +39,14 @@ University of California \\ % Your institution for the title page
 \end{frame}
 
 \begin{frame}
-\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\frametitle{Plan de la présentation} % Table of contents slide, comment this block out to remove it
 \tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
 \end{frame}
 
-%----------------------------------------------------------------------------------------
-%	PRESENTATION SLIDES
-%----------------------------------------------------------------------------------------
-
-%------------------------------------------------
-\section{First Section} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
-%------------------------------------------------
-
-\subsection{Subsection Example} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+\section{Introduction}
 
 \begin{frame}
-\frametitle{Paragraphs of Text}
+\frametitle{Introduction}
 Sed iaculis dapibus gravida. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.\\~\\
 
 Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio. Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis. Vestibulum ultrices tincidunt libero, quis commodo erat ullamcorper id.
@@ -232,7 +162,7 @@ Uncomment the code on this slide to include your own image from the same directo
 \frametitle{Citation}
 An example of the \verb|\cite| command to cite within the presentation:\\~
 
-This statement requires citation \cite{p1}.
+This statement requires citation \cite{GW99}.
 \end{frame}
 
 %------------------------------------------------
@@ -241,17 +171,54 @@ This statement requires citation \cite{p1}.
 \frametitle{References}
 \footnotesize{
 \begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem[Smith, 2012]{p1} John Smith (2012)
-\newblock Title of the publication
-\newblock \emph{Journal Name} 12(3), 45 -- 678.
+\bibitem{GW99}
+{\sc Ganter, B. et Wille, R.}
+\newblock {\em Formal Concept Analysis: Mathematical Foundations}.
+\newblock Springer-Verlag New York, Inc., 1999.
+
+\bibitem{3}
+{\sc Guigues J.~L. et Duquenne~V.}
+\newblock Familles minimales d'implications informatives r{\'e}sultant d'un
+  tableau de donn{\'e}es binaires.
+\newblock {\em Math\'ematiques et Sciences Humaines 95\/} (1986), 5--18.
+
+\bibitem{Ganter04}
+{\sc Ganter, B. et Obiedkov, S.~A.}
+\newblock Implications in triadic formal contexts.
+\newblock In {\em ICCS\/} (2004), pp.~186--195.
+
+\bibitem{Roberge}
+{\sc Roberge, G.}
+\newblock Visualisation des r{\'e}sultats d'une fouille de donn{\'e}es dans les
+  treillis de concepts.
+\newblock M{\'e}moire de ma\^{i}trise, Universit{\'e} du Qu{\'e}bec en Outaouais, 2007.
+
+\bibitem{Missaoui2012}
+{\sc Missaoui, R., Nourine, L. et Renaud, Y.}
+\newblock Computing implications with negation from a formal context.
+\newblock {\em Fundam. Inf. 115}, 4 (Dec. 2012), 357--375.
+
 \end{thebibliography}
 }
 \end{frame}
 
+\begin{frame}
+\frametitle{References}
+\footnotesize{
+\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
+
+\bibitem{Missaoui2017}
+{\sc Missaoui, R., et Emamirad, K.}
+\newblock Lattice Miner 2.0: A Formal Concept Analysis Tool.
+\newblock In {\em Supplementary Proc. of ICFCA, Rennes, France, 2017\/} (2017),
+  pp.~91--94.
+\end{thebibliography}
+}
+\end{frame}
 %------------------------------------------------
 
 \begin{frame}
-\Huge{\centerline{The End}}
+\Huge{\centerline{Questions ?}}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
