@@ -1,4 +1,3 @@
-% !TEX root
 % !TEX encoding = UTF-8 Unicode
 % -*- coding: UTF-8; -*-
 % vim: set fenc=utf-8
@@ -11,11 +10,21 @@
 \setbeamertemplate{navigation symbols}{}
 }
 
+\usepackage[
+backend=biber,
+style=alphabetic,
+citestyle=authoryear,
+sorting=ynt
+]{biblatex}
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage[french]{babel} % Pour écrire en français
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage{silence}
+
+\WarningFilter{biblatex}{Patching footnotes failed}
 
 \uselanguage{French}
 \languagepath{French}
@@ -32,6 +41,7 @@ Département d’informatique et d’ingénierie \\
 }
 \date{mercredi 31 mai 2017} % Date, can be changed to a custom date
 
+\addbibresource{presentation-memoire-emamirad.bib} % Add bib
 \begin{document}
 
 \begin{frame}
@@ -47,9 +57,15 @@ Département d’informatique et d’ingénierie \\
 
 \begin{frame}
 \frametitle{Introduction}
-Sed iaculis dapibus gravida. Morbi sed tortor erat, nec interdum arcu. Sed id lorem lectus. Quisque viverra augue id sem ornare non aliquam nibh tristique. Aenean in ligula nisl. Nulla sed tellus ipsum. Donec vestibulum ligula non lorem vulputate fermentum accumsan neque mollis.\\~\\
-
-Sed diam enim, sagittis nec condimentum sit amet, ullamcorper sit amet libero. Aliquam vel dui orci, a porta odio. Nullam id suscipit ipsum. Aenean lobortis commodo sem, ut commodo leo gravida vitae. Pellentesque vehicula ante iaculis arcu pretium rutrum eget sit amet purus. Integer ornare nulla quis neque ultrices lobortis. Vestibulum ultrices tincidunt libero, quis commodo erat ullamcorper id.
+\framesubtitle{Problématique}
+\begin{itemize}
+\item L'analyse formelle de concepts (AFC)~\parencite{Ganter1999}
+est un formalisme de représentation des connaissances et de fouille de données qui est
+\begin{itemize}
+\item utile dans divers domaines (informatique, linguistique, sociologie, biologie, etc.),
+\item produit des visualisations graphiques des structures inhérentes aux données sous forme de treillis de concepts.
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
@@ -160,67 +176,20 @@ Uncomment the code on this slide to include your own image from the same directo
 
 \begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
 \frametitle{Citation}
-An example of the \verb|\cite| command to cite within the presentation:\\~
+An example of the \verb|\parencite| command to cite within the presentation:\\~
 
-This statement requires citation \cite{GW99}.
+This statement requires citation \parencite{Ganter1999}.
 \end{frame}
 
 %------------------------------------------------
-
 \begin{frame}
 \frametitle{References}
-\footnotesize{
-\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-\bibitem{GW99}
-{\sc Ganter, B. et Wille, R.}
-\newblock {\em Formal Concept Analysis: Mathematical Foundations}.
-\newblock Springer-Verlag New York, Inc., 1999.
-
-\bibitem{3}
-{\sc Guigues J.~L. et Duquenne~V.}
-\newblock Familles minimales d'implications informatives r{\'e}sultant d'un
-  tableau de donn{\'e}es binaires.
-\newblock {\em Math\'ematiques et Sciences Humaines 95\/} (1986), 5--18.
-
-\bibitem{Ganter04}
-{\sc Ganter, B. et Obiedkov, S.~A.}
-\newblock Implications in triadic formal contexts.
-\newblock In {\em ICCS\/} (2004), pp.~186--195.
-
-\bibitem{Roberge}
-{\sc Roberge, G.}
-\newblock Visualisation des r{\'e}sultats d'une fouille de donn{\'e}es dans les
-  treillis de concepts.
-\newblock M{\'e}moire de ma\^{i}trise, Universit{\'e} du Qu{\'e}bec en Outaouais, 2007.
-
-\bibitem{Missaoui2012}
-{\sc Missaoui, R., Nourine, L. et Renaud, Y.}
-\newblock Computing implications with negation from a formal context.
-\newblock {\em Fundam. Inf. 115}, 4 (Dec. 2012), 357--375.
-
-\end{thebibliography}
-}
-\end{frame}
-
-\begin{frame}
-\frametitle{References}
-\footnotesize{
-\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
-
-\bibitem{Missaoui2017}
-{\sc Missaoui, R., et Emamirad, K.}
-\newblock Lattice Miner 2.0: A Formal Concept Analysis Tool.
-\newblock In {\em Supplementary Proc. of ICFCA, Rennes, France, 2017\/} (2017),
-  pp.~91--94.
-\end{thebibliography}
-}
+\printbibliography
 \end{frame}
 %------------------------------------------------
-
 \begin{frame}
 \Huge{\centerline{Questions ?}}
 \end{frame}
-
 %----------------------------------------------------------------------------------------
 
 \end{document} 

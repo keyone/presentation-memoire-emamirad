@@ -9,7 +9,11 @@
 		"*.snm": true,
 		"*.synctex.gz": true,
 		"*.toc": true,
-		"*.vrb": true
+		"*.vrb": true,
+		"*.run.xml": true,
+		"*.bcf": true,
+		"*.bbl": true,
+		"*.blg": true
 	},
 	"files.exclude": {
 		"*.aux": true,
@@ -21,6 +25,10 @@
 		"*.snm": true,
 		"*.synctex.gz": true,
 		"*.toc": true,
-		"*.vrb": true
+		"*.vrb": true,
+		"*.run.xml": true,
+		"*.bcf": true,
+		"*.bbl": true,
+		"*.blg": true
 	}
 }

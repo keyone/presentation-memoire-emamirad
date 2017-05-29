@@ -8,3 +8,7 @@
 *.synctex.gz
 *.toc
 *.vrb
+*.run.xml
+*.bcf
+*.bbl
+*.blg
