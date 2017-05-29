@@ -13,7 +13,8 @@
 		"*.run.xml": true,
 		"*.bcf": true,
 		"*.bbl": true,
-		"*.blg": true
+		"*.blg": true,
+		"*.synctex.gz(busy)": true
 	},
 	"files.exclude": {
 		"*.aux": true,
@@ -29,6 +30,7 @@
 		"*.run.xml": true,
 		"*.bcf": true,
 		"*.bbl": true,
-		"*.blg": true
+		"*.blg": true,
+		"*.synctex.gz(busy)": true
 	}
 }

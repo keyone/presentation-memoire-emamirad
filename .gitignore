@@ -12,3 +12,4 @@
 *.bcf
 *.bbl
 *.blg
+*.synctex.gz(busy)
