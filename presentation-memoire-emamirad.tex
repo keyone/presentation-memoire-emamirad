@@ -110,6 +110,7 @@ est un formalisme de représentation des connaissances et de fouille de données
 
 \begin{frame}
 \frametitle{Rappels I}
+\framesubtitle{Analyse formelle de concepts}
 \begin{block}{Définition 1: Contexte formel}
 Soit $\KK = \GMI$ \emph{un contexte formel} où $G$, $M$ et $I$ sont respectivement un ensemble d'objets, une collection d'attributs et une relation binaire entre $G$ et $M$. L'expression $(g,m) \in I$ ou encore $gIm$ signifie que l'objet $g$ possède l'attribut $m$.
 \end{block}
@@ -135,59 +136,255 @@ Soit $\KK = \GMI$ \emph{un contexte formel} où $G$, $M$ et $I$ sont respectivem
 \caption{Exemple de contexte \context}
 \label{cap:context-simple}
 \end{table}
-
 \end{frame}
+
+%------------------------------------------------
 \begin{frame}
 \frametitle{Rappels II}
-
+\framesubtitle{Analyse formelle de concepts}
 \begin{block}{Définition 2: Concept formel}
 Un \emph{concept formel} $c$ est une paire d'ensembles $c:= (A,B)$ avec $A \subseteq G$, $B \subseteq M$, $A=B'$ et $B=A'$, où $A'$ est l'ensemble des attributs partagés par les objets dans $A$ et $B'$ est l'ensemble des objets ayant tous leurs attributs dans $B$. Les sous-ensembles $A$ et $B$ sont appelés respectivement l'extension et l'intention du concept $c$. Les valeurs de $A'$ et $B'$ sont obtenues comme suit : 
 $A':=\{m \in M \mid g I m\ \forall g \in A\}\ \text{et}\ B':=\{g \in G \mid g I m\ \forall~m \in B\}$.
 \end{block}
-
-
 \begin{block}{Défintion 3: Sous-ensemble fermé}
 Un sous-ensemble $X$ est fermé si $X''=X$. Un concept objet pour l'objet $g$ est une paire de la forme $\gamma(g)=(g'', g')$ alors que le concept attribut pour l'attribut $m$ est $\mu(m)=(m', m'')$.
 Les sous-ensembles fermés de $G$ sont les extensions alors que les sous-ensembles fermés de $M$ sont les intentions de $\KK$.
 \end{block}
 \end{frame}
+
+%------------------------------------------------
 \begin{frame}
 \frametitle{Rappels III}
+\framesubtitle{Analyse formelle de concepts}
 \begin{block}{Défintion 4: Treillis de concepts}
 Un \textit{treillis de concepts} $\CLGMI$ est un treillis résultant de l'ordre partiel existant entre les concepts du contexte $\KK = (G,M,I)$.
 $$(A,B) \leq (C,D) \Leftrightarrow A \subseteq C\ \text{et}\ D \subseteq B$$
 $(A, B)$ est alors un sous-concept ou prédecesseur immédiat de $(C, D)$ alors que ce dernier est un successeur de $(A, B)$.
 \end{block}
-
 \begin{block}{Définition 5: Les bornes du treillis}
 La borne inférieure $\wedge$ (\emph{meet}) d'un ensemble de concepts $(X_i, Y_i)$ avec $i = 1, \ldots k$ est le plus grand des prédécesseurs communs. De même, la borne supérieure $\vee$ (\emph{join}) d'un ensemble de concepts est le petit des successeurs communs.
 \end{block}
 \end{frame}
+
+%------------------------------------------------
 \begin{frame}
 \frametitle{Rappels IV}
+\framesubtitle{Analyse formelle de concepts}
 \begin{figure}[H]
 \begin{center}\includegraphics[scale=0.50]{figures/exemple-treillis.png}\end{center}
-\caption{Exemple de treillis de concepts pour le contexte du tableau \ref{cap:context-simple}}
+\caption{Treillis avec étiquetage complet pour le contexte du tableau \ref{cap:context-simple}}
 \end{figure}
 \end{frame}
+
+%------------------------------------------------
 \begin{frame}
 \frametitle{Rappels V}
+\framesubtitle{Analyse formelle de concepts}
+\begin{figure}[H]
+\label{cap:fig:treillis-reduced-labelling}
+\begin{center}\includegraphics[scale=0.50]{figures/treillis-reduced-labelling.png}\end{center}
+\caption{Treillis avec étiquetage réduit pour le contexte du tableau \ref{cap:context-simple}}
+\end{figure}
+\end{frame}
 
-\begin{block}{Block 3}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels VI}
+\framesubtitle{Analyse formelle de concepts}
+L'\emph{infimum} est le plus petit concept d'un treillis de Galois alors que le \emph{supremum} est son plus grand concept.
+
+Lorsqu'un concept $c_1$ est plus petit qu'un autre concept $c_2$, alors le nœud représentant $c_1$ est placé plus bas que son successeur $c_2$. Lorsqu'une relation d'ordre existe entre les concepts $c_1$ et $c_2$, on dit alors que ces concepts sont \textit{comparables} ($\leq$), sinon ils ne le sont pas ($\not\leq$).
+\begin{block}{Définition 6: sup-irréductible et inf-irréductible}
 On rappelle qu'un concept est dit \emph{sup-irréductible} (ou \emph{join-irréductible}) si et seulement si il possède un unique prédécesseur et il est dit \emph{inf-irréductible} (ou \emph{meet-irréductible}) s'il admet un unique successeur.
 \end{block}
 \end{frame}
+
 %------------------------------------------------
-
 \begin{frame}
-\frametitle{Blocks of Highlighted Text}
-
-
-
-
-
+\frametitle{Rappels VII}
+\framesubtitle{Règles d'association et implications}
+\begin{block}{Définition 7: règle d'association}
+$$r : Y \rightarrow Z\ [sup, conf]$$
+$r$ est une règle d'association avec
+\begin{itemize}
+\item $Y$ et $Z$ sont des sous-ensembles d'attributs appelés \textit{itemsets},
+\item $Y \cap Z = \emptyset$,
+\item \textit{sup}, le support est $Prob(Y \cup Z)$ (proportion des objets ayant simultanément les attributs $Y$ et $Z$), et
+\item \textit{conf}, la confiance est $Prob(Y \cup Z)$ (probabilité d'avoir $Z$ lorsque $Y$ est présent dans le contexte \context).
+\end{itemize}
+\end{block}
 \end{frame}
 
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels VIII}
+\framesubtitle{Règles d'association et implications}
+\begin{block}{Définitions 8: itemsets et générateurs}
+\begin{itemize}
+\item Un \emph{itemset} est dit \emph{fréquent} si la proportion d'objets le possédant est au moins égale au support minimum défini par l'utilisateur.
+\item Un \emph{itemset} $Y$ est dit \emph{fermé} si $Y = Y''$. Cela signifie que $Y$ est une intention d'un concept formel.
+\item Un \emph{générateur} $G$ \parencite{Pfaltz2002} d'un itemset fermé (intention) $Y$ est un ensemble minimal de  $Y$
+tel que $G''= Y$. 
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels IX}
+\framesubtitle{Règles d'association et implications}
+\begin{block}{Définition 9: implication et base générique}
+$$r: g_i \rightarrow Int(c)\ \backslash\ g_i $$
+$r$ est une implication ou règle exacte avec
+\begin{itemize}
+\item $c$ un concept formel,
+\item $G=\{g_1,\ldots g_i, \ldots g_n \}$ l'ensemble de ses générateurs,
+\item $Int(c)$ représente l'intention du concept $c$,
+\item \emph{support}$(c)$ est la proportion d'objets contenus dans l'extension de $c$,
+\item \emph{support}$(r) = $ \emph{support}$(c)$ et
+\item \emph{confiance}$(r) = 100\ \%$
+\end{itemize}
+Une base générique \parencite{Pasquier1999} d'implications est une représentation relativement concise d'implications de la forme précédente. 
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels X}
+\framesubtitle{Règles d'association et implications}
+\begin{block}{Définition 10: règle approximative}
+$$r: g_i \rightarrow Int(c_j)\backslash Int(c) $$
+$r$ est une règle approximative avec
+\begin{itemize}
+\item $c$ un concept formel,
+\item $P = \{c_1, \ldots, c_j, \ldots \}$ l'ensemble des prédecesseurs de $c$,
+\item $Int(c)$ représente l'intention du concept $c$,
+\item $g_i$ un générateur de $Int(c)$,
+\item \emph{support}$(r) =$ \emph{support}$(c_j)$, et
+\item  \emph{confiance}$(r) = $\emph{support}$(c_j)/support(c)$
+\end{itemize}
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels XI}
+\framesubtitle{Règles d'association et implications}
+\begin{block}{Définitions 11: pseudo-intent et base de Guigues-Duquenne}
+Un ensemble $P \subseteq M$ est un \emph{pseudo-intent} de $(G, M, I)$ ~\parencite{Ganter1999,Guigues1986} si et seulement si $P \neq P''$ et si $Q'' \subseteq P$ est vraie pour tout pseudo-intent $Q \subseteq P$, $Q \ne P.$ \\
+L'ensemble des implications de la forme :
+$$\cal{L} := \{ P \rightarrow P''\ \backslash\ P\ |\ P\ \textit{pseudo-intent}\ \}$$
+est appelé base de Guigues-Duquenne (\emph{stem base}) et reconnue comme étant minimale.
+\end{block}
+À titre d'exemple, $\{a, c\}$ est un pseudo-intent dont le fermé est $\{a, c, e\}$, d'où l'implication $\{a, c\} \rightarrow \{e\}$
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels XII}
+\framesubtitle{Règles d'association et implications}
+\begin{figure}[H]
+\label{cap:fig:treillis-gen}
+\begin{center}\includegraphics[scale=0.36]{figures/Treillis21FullLabelGen.png}\end{center}
+\caption{Treillis de concepts avec indication des générateurs}
+\end{figure}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels XIII}
+\framesubtitle{Règles d'association et implications}
+\begin{block}{Définition 12: contexte complémentaire  $\KKn$}
+Soit un contexte $\KK = \GMI$ décrivant un ensemble $G$ d’objets, un ensemble $M$ de propriétés (attributs) et une relation binaire $I$ entre $G$ et $M$. Le contexte complémentaire de $\KK$ est $\KKn = (G, \tilde{M}, G \times M \backslash I)$ avec $\tilde{M}$ l'ensemble des attributs négatifs.
+\end{block}
+\begin{block}{Définition 13: apposition du contexte $\KK$ avec son complémentaire $\KKn$}
+Le contexte $\KKc$ est l'apposition du contexte $\KK$ avec son complémentaire $\KKn$. Cela signifie que $\KKc:= (G, M \cup \tilde{M}, I \cup G \times M \backslash I)$.
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels XIV}
+\framesubtitle{Règles d'association et implications}
+\begin{figure}[h]
+\label{cap:fig:negctx}
+\begin{center}
+\begin{cxt}%
+\cxtName{}%
+\att{a}%
+\att{b}%
+\att{c}%
+\att{d}%
+\att{e}%
+\att{f}%
+\att{$\tilde{a}$}%
+\att{$\tilde{b}$}%
+\att{$\tilde{c}$}%
+\att{$\tilde{d}$}%
+\att{$\tilde{e}$}%
+\att{$\tilde{f}$}%
+\obj{x.x.x..x.x.x}{1}
+\obj{.x.x.xx.x.x.}{2}
+\obj{..xx..xx..xx}{3}
+\obj{.xx..xx..xx.}{4}
+\obj{xx...x..xxx.}{5}
+\obj{xx.xx...x..x}{6}
+\end{cxt}
+\end{center}
+\caption{$\mathbb{K}|\tilde{\mathbb{K}}$ : apposition du contexte $\KK$ avec son complémentaire $\KKn$}
+\end{figure}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels XV}
+\framesubtitle{Relations flèches}
+\begin{block}{Définition 14: Relations flèches}
+La relation entre l'objet $g$ et l'attribut $m$ dans un contexte formel se présente sous l'une des quatre formes suivantes~:
+\begin{itemize}
+\item $g \updownarrow m$ si $\gamma(g) \not\leq \mu(m)$, $\gamma(g) \leq m^+$, et $g^- \leq \mu(m)$
+\item $g \uparrow m$ si $\gamma(g) \not\leq \mu(m)$, $\gamma(g) \leq m^+$, et $g^- \not\leq \mu(m)$
+\item $g \downarrow m$ si $\gamma(g) \not\leq \mu(m)$, $\gamma(g) \not\leq m^+$, et $g^- \leq \mu(m)$
+\item $g \circ m$ si $\gamma(g) \not\leq \mu(m)$, $\gamma(g) \not\leq m^+$, et $g^- \not\leq \mu(m)$
+\end{itemize}
+où $g^-$ représente le prédécesseur immédiat du concept objet (sup-irréductible) $\gamma(g)$ 
+et $m^+$ représente le successeur immédiat du concept attribut (inf-irréductible) $ \mu(m)$.
+\end{block}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels XVI}
+\framesubtitle{Relations flèches}
+\begin{figure}[h]
+\label{cap:fig:arrow}
+\begin{center}
+\begin{cxt}%
+\cxtName{}%
+\att{a}%
+\att{b}%
+\att{c}%
+\att{d}%
+\att{e}%
+\att{f}%
+\obj{xbxbxd}{1}
+\obj{bxbxdx}{2}
+\obj{bbxxdd}{3}
+\obj{bxxbdx}{4}
+\obj{xxbbbx}{5}
+\obj{xxbxxb}{6}
+\end{cxt}
+\end{center}
+\caption{Relation flèches pour le contexte $\KK$}
+\end{figure}
+Par exemple, $3 \downarrow e$ car 
+\begin{itemize}
+\item $\gamma(3) \not\leq \mu(e)$ avec $\gamma(3)= (3, cd)$ et $\mu(e)=(16, ae)$
+\item $\gamma(3) \not\leq e^+$ avec $e^+ = (156,a)$
+\item $3^- \leq \mu(e)$ avec $3^-=(\emptyset, abcdef)$
+\end{itemize}
+\end{frame}
 %------------------------------------------------
 
 \begin{frame}
