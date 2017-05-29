@@ -57,14 +57,29 @@ Département d’informatique et d’ingénierie \\
 
 \begin{frame}
 \frametitle{Introduction}
-\framesubtitle{Problématique}
 \begin{itemize}
 \item L'analyse formelle de concepts (AFC)~\parencite{Ganter1999}
 est un formalisme de représentation des connaissances et de fouille de données qui est
 \begin{itemize}
-\item utile dans divers domaines (informatique, linguistique, sociologie, biologie, etc.),
-\item produit des visualisations graphiques des structures inhérentes aux données sous forme de treillis de concepts.
+\item utilisé dans divers domaines (informatique, linguistique, sociologie, biologie, etc.), et
+\item produit des visualisations graphiques des structures inhérentes aux données sous forme de treillis de concepts (Galois).
 \end{itemize}
+\item Au cours des deux dernières décennies, on a vu apparaître plusieurs d'outils d'analyse formelle de concepts tels \emph{ToscanaJ, ConExp, Coron, Java Lattices}, et \emph{Lattice Miner}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Introduction}
+\framesubtitle{Objectifs}
+\begin{itemize}
+\item But: Enrichir \emph{Lattice Miner}, un prototype de fouille de données qui exploite l’AFC avec les objectifs suivants~:
+
+\begin{enumerate}
+\item production d’implications avec négation,
+\item enrichissement du module de génération des règles triadiques pour obtenir exhaustivement et précisément les trois formes d’implications triadiques définies par~\parencite{Ganter2004},
+\item validation intensive de la procédure de production de la base d’implications de \parencite{Guigues1986} et de la procédure de calcul des relations de flèches. Cette dernière est utile dans le processus de décomposition de contextes formels, et
+\item amélioration de la convivialité de l'interface usager.
+\end{enumerate}
 \end{itemize}
 \end{frame}
 
