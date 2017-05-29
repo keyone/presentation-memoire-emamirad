@@ -9,6 +9,14 @@
 \setbeamertemplate{footline}[page number]
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{caption}[numbered]{}% Number float-like environments
+\setbeamertemplate{headline}{%
+\leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex]{palette quaternary}%
+    \insertsectionnavigationhorizontal{\paperwidth}{}{\hskip0pt plus1filll}
+    \end{beamercolorbox}%
+  }
+}
 }
 
 \usepackage[
@@ -26,6 +34,8 @@ sorting=ynt
 \usepackage{silence}
 \usepackage{fca}
 \usepackage{caption}
+\usepackage[ruled,linesnumbered,french]{algorithm2e} 
+\usepackage[noend]{algorithmic-eng}
 
 \WarningFilter{biblatex}{Patching footnotes failed}
 
@@ -62,6 +72,11 @@ Département d’informatique et d’ingénierie \\
 \addbibresource{presentation-memoire-emamirad.bib} % Add bib
 \begin{document}
 
+{
+\makeatletter % to change template
+  \setbeamertemplate{headline}[default] % not mandatory, but I though it was better to set it blank
+  \def\beamer@entrycode{\vspace*{-\headheight}} % here is the part we are interested in :)
+\makeatother
 \begin{frame}
 \titlepage % Print the title page as the first slide
 \end{frame}
@@ -70,7 +85,7 @@ Département d’informatique et d’ingénierie \\
 \frametitle{Plan de la présentation} % Table of contents slide, comment this block out to remove it
 \tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
 \end{frame}
-
+}
 %------------------------------------------------
 \section{Introduction}
 %------------------------------------------------
@@ -390,7 +405,7 @@ Par exemple, $3 \downarrow e$ car
 \end{frame}
 
 %------------------------------------------------
-\section{Les outils de l'analyse formelle de concepts}
+\section[Outils]{Les outils de l'analyse formelle de concepts}
 %------------------------------------------------
 \begin{frame}
 \huge{\centerline{Les outils de l'analyse formelle de concepts}}
@@ -615,13 +630,190 @@ Il s'agit de la 7-ème règle d'association laquelle indique que $b$ implique $f
 \end{frame}
 
 %------------------------------------------------
-\section{Production d'implications avec négation}
+\section[Négation]{Production d'implications avec négation}
 %------------------------------------------------
 \begin{frame}
 \huge{\centerline{Production d'implications avec négation}}
 \end{frame}
 %------------------------------------------------
-
+\begin{frame}
+\frametitle{Production d'implications avec négation}
+\begin{block}{Définition 15: Catégories d'implications}
+$$r: Y \rightarrow Z \ [sup]$$
+$r$ est une implication du contexte $\KKc$ tel que:
+\begin{itemize}
+\item $Y$ et $Z$ sont des sous-ensembles de $M \cup \tilde{M}$
+\item $Y \cap Z = \emptyset$
+\end{itemize}
+Les implications appartiennent à une des catégories suivantes~: 
+\begin{itemize}
+\item implications \emph{purement négatives} avec $M \cap (Y \cup Z) = \emptyset$,
+\item implications \emph{purement positives} avec $\tilde{M} \cap (Y \cup Z) = \emptyset$, et 
+\item implications \emph{mixtes} tel que $M \cap (Y \cup Z) \ne \emptyset$ et $\tilde{M} \cap (Y \cup Z) \ne \emptyset$.
+\end{itemize}
+\end{block}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Production d'implications avec négation}
+\begin{block}{Définition 16: Implications basées sur les clés (\emph{key-based implication})}
+$$r: Y \rightarrow M \cup \tilde{M} \backslash Y \ [0]$$
+\begin{itemize}
+\item $Y$ une clé dans le contexte $\KKc$, ce qui signifie que $Y$ implique tous les attributs dans $M \cup \tilde{M}$
+\item Le support d'une telle implication est évidemment nul car il n'existe aucun itemset $Y$ impliquant tous les attributs dans $M \cup \tilde{M}$.
+\end{itemize}
+\end{block}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Production d'implications avec négation}
+\framesubtitle{Solution}
+ \begin{theorem}
+Soit $Ax$ avec $x$ un attribut de $M\tilde{M}$ et $A \subseteq M\tilde{M}$. Alors, $Ax \rightarrow
+M\tilde{M}\backslash Ax~[0]$
+   $\Leftrightarrow$ $A \rightarrow \tilde{x}~[sup]$ avec $sup=|A'| / |G|$ où $A'$ est l'ensemble d'objets possédant les attributs contenus dans $A$ et $G$ est l'ensemble des objets du contexte $\KK$.
+ \label{axiom1}
+\end{theorem}
+Ces implications avec clé de la forme $Ax \rightarrow
+M\tilde{M}\backslash Ax$ ont un support nécessairement nul puisque même si un objet possède tous les attributs dans $M$, il n'en possède aucun dans $\tilde{M}$.
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Production d'implications avec négation}
+\begin{algorithm}[H]
+\caption{Génération des clés de l'infimum du treillis à partir de \context}
+\begin{algorithmic}[1]
+\STATE \textbf{Procédure}
+\STATE \textbf{Entrée:} Contexte initial $\KK:= (G,M,I)$
+\STATE \textbf{Sortie:} $\cal{K}$ : Les générateurs de l'infimum du treillis du contexte $\KKc$
+\STATE $INT \gets$ $\emptyset$~~~\COMMENT{Ensemble des intentions des co-atomes}
+\STATE $O \gets$ $\emptyset$~~~\COMMENT{Objets traités}
+\WHILE{$G \ne O$}
+  \FORALL{$o \in G$ mais $o \not\in O$}
+    \STATE $X \gets o''$ ~~~\COMMENT{Calcul du fermé de l'objet $o$}
+    \STATE $Y \gets Intent(o) \cup (M\ \backslash\ Intent(o))^{\sim}$
+    \STATE $O := O \cup X$
+    \STATE $INT := INT \cup \{Y\}$
+  \ENDFOR \STATE \textbf{end for}
+\ENDWHILE \STATE \textbf{end while}
+\STATE $\cal{K}$ $\gets \text{JEN}(M \cup \tilde{M}, INT)$
+\STATE \textbf{return} $\cal{K}$
+\end{algorithmic}
+\end{algorithm}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Production d'implications avec négation}
+\begin{columns}[t] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+\column{.45\textwidth} % Left column and width
+\begin{figure}[h]
+\label{cap:fig:negctx}
+\begin{center}
+\begin{cxt}%
+\cxtName{}%
+\att{a}%
+\att{b}%
+\att{c}%
+\att{d}%
+\att{e}%
+\obj{x....}{1}
+\obj{x.x..}{2}
+\obj{xx...}{3}
+\obj{.x...}{4}
+\obj{x.x.x}{5}
+\obj{xxx.x}{6}
+\obj{.xxx.}{7}
+\obj{.xx.x}{8}
+\end{cxt}
+\end{center}
+\caption{Exemple de contexte \context}
+\end{figure}
+\column{.5\textwidth} % Right column and width
+\begin{itemize}
+\item L'exécution de l'algorithme 1 nous donne les clés suivantes: $\{a, a'\}$, $\{a', b'\}$, $\{b, b'\}$, $\{a, d\}$, $\{b', d\}$, $\{d, d'\}$, $\{c, c'\}$, $\{c', d\}$, $\{c', e\}$, $\{d, e\}$, $\{e, e'\}$, $\{a, b, c, e'\}$, $\{b, c, d', e'\}$, $\{a', c, d', e'\}$.
+\item Après avoir écarté les clés triviales représentant un attribut et sa négation (ex. $\{a, a'\}$), on retient les éléments suivants~: $\{a', b'\}$, $\{a, d\}$, $\{b', d\}$, $\{c', d\}$, $\{c', e\}$, $\{d, e\}$, $\{a, b, c, e'\}$, $\{b, c, d', e'\}$, $\{a', c, d', e'\}$.
+\end{itemize}
+\end{columns}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Production d'implications avec négation}
+\framesubtitle{Création des implications avec négation à partir des clés candidates}
+\begin{table}[H]
+\begin{tabular}{|l||l|l|l|}
+\hline
+\textbf{Candidats} & $\{a', b'\}$ & $\{a, d\}$ & $\{b', d\}$  \\ \hline
+\textbf{Règles}
+& \begin{tabular}[c]{@{}l@{}}$\{b'\} \rightarrow \{a\}$\\ $\{a'\} \rightarrow \{b\}$\end{tabular} 
+& \begin{tabular}[c]{@{}l@{}}$\{d\} \rightarrow \{a'\}$\\ $\{a\} \rightarrow \{d'\}$\end{tabular} 
+& \begin{tabular}[c]{@{}l@{}}$\{d\} \rightarrow \{b\}$\\ $\{b'\} \rightarrow \{d'\}$\end{tabular} 
+\\ \hline \hline
+\textbf{Candidats} & $\{c', e\}$ & $\{d, e\}$ & $\{a, b, c, e'\}$ \\ \hline
+\textbf{Règles}
+& \begin{tabular}[c]{@{}l@{}}$\{e\} \rightarrow \{c\}$\\ $\{c'\} \rightarrow \{e'\}$\end{tabular} 
+& \begin{tabular}[c]{@{}l@{}}$\{e\} \rightarrow \{d'\}$\\ $\{d\} \rightarrow \{e'\}$\end{tabular} 
+& \begin{tabular}[c]{@{}l@{}}$\{b, c, e'\} \rightarrow \{a'\}$\\ $\{a, c, e'\} \rightarrow \{b'\}$\\ $\{a, b, e'\} \rightarrow \{c'\}$\\ $\{a, b, c\} \rightarrow \{e\}$\end{tabular}
+\\ \hline \hline
+\textbf{Candidats} & $\{b, c, d', e'\}$ & $\{a', c, d', e'\}$ & $\{c', d\}$ \\ \hline
+\textbf{Règles}
+& \begin{tabular}[c]{@{}l@{}}$\{c, d', e'\} \rightarrow \{b'\}$\\ $\{b, d', e'\} \rightarrow \{c'\}$\\ $\{b, c, e'\} \rightarrow \{d\}$\\ $\{b, c, d'\} \rightarrow \{e\}$\end{tabular}
+& \begin{tabular}[c]{@{}l@{}}$\{c, d', e'\} \rightarrow \{a\}$\\ $\{a', d', e'\} \rightarrow \{c'\}$\\ $\{a', c, e'\} \rightarrow \{d\}$\\ $\{a', c, d'\} \rightarrow \{e\}$\end{tabular}
+& \begin{tabular}[c]{@{}l@{}}$\{d\} \rightarrow \{c\}$\\ $\{c'\} \rightarrow \{d'\}$\end{tabular} 
+\\ \hline 
+\end{tabular}
+\end{table}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Production d'implications avec négation}
+\framesubtitle{Calcul du support des implications}
+Le support de chaque implication $ Y \rightarrow Z$ se calcule avec la formule suivante:
+\begin{equation} \label{eq:support_t}
+Sup(T)= \sum_{PT(T)~\subseteq~U~\subseteq T} (-1)^{n(U)}\times Sup(P(U))
+\end{equation}
+\begin{itemize}
+\item  $T = Y\cup Z$ représente l'ensemble de tous les attributs positifs et négatifs de l'implication
+\item  $Sup(T)$ est le support de $T$,
+\item $PT(T)$ est l'ensemble des éléments positifs dans $T$,
+\item $n(T)$ est le nombre d'éléments négatifs dans $T$, et 
+\item $P(U)$ représente l'ensemble des attributs dans $U$ exprimés en éléments positifs.
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Production d'implications avec négation}
+\framesubtitle{Intégration de la solution dans \lm}
+\begin{figure}[H]
+\caption{Affichage des implications avec négation}
+\label{fig:lm-neg-rules}
+\begin{center}\includegraphics[scale=0.35]{figures/lm-neg-rules.png}\end{center}
+\end{figure}
+\end{frame}
+%------------------------------------------------
+\section[Triadique]{Enrichissement du module de génération des règles triadiques}
+%------------------------------------------------
+\begin{frame}
+\large{\centerline{Enrichissement du module de génération des règles triadiques}}
+\end{frame}
+%------------------------------------------------
+\section{Conclusion}
+\begin{frame}
+\frametitle{Conclusion}
+Revue des contributions:
+\begin{itemize}
+\item Vérification des procédures de la base d'implications de Guigues-Duquenne;
+\item Vérification des procédures de calcul des relations de flèches;
+\item Production d'implications avec négation;
+\item Enrichissement du module de génération des règles triadiques;
+\item Mise à jour de Lattice Miner avec la dernière version de Java 8, support de Maven, et documentation technique;
+\item Article pour la conférence ICFCA 2017~\parencite{Missaoui2017};
+\end{itemize}
+Travaux futurs:
+\begin{itemize}
+\item Associer au module de calcul des implications (y compris celles avec négation et les implications triadiques) une autre procédure qui permet de calculer le fermé d'un groupe d'attributs $Y$ avec ou sans un ensemble $C$ de conditions;
+\item Version Web \emph{Lattice Miner};
+\end{itemize}
+\end{frame}
 %------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{References}
