@@ -416,7 +416,8 @@ Quelques fonctionnalités de Galicia:
 \begin{itemize}
 \item Affichage du treillis en trois dimensions
 \item Manipulation du contexte et du treillis
-\item Plusieurs procédures de construction du treillis : Bordat, Nourine, Godin et \emph{Next-Closure}.
+\item Plusieurs procédures de construction du treillis : Bordat, Nourine, Godin et \emph{Next-Closure}
+\item Connection à des bases de données SQL pour sauvegarder les contextes
 \end{itemize}
 \end{columns}
 
@@ -440,6 +441,187 @@ Quelques fonctionnalités de Galicia:
 \end{figure}
 \end{columns}
 \end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{Le système Coron}
+Le système Coron\footnote{\url{http://coron.loria.fr/site/index.php}.}~\parencite{Szathmary2006} est une boîte à outils qui a été développée au laboratoire LORIA\footnote{Laboratoire lorrain de recherche en informatique et ses applications, Nancy, France} 
+\begin{columns}[t]
+\column{.45\textwidth} % Left column and width
+\begin{itemize}
+\item Développé avec Java et Perl
+\item En ligne de commandes
+\item Version actuelle de ce système est 0.8 et date de janvier 2010
+\item Compatible avec les systèmes d'exploitation Unix, macOS et Windows
+\end{itemize}
+\column{.55\textwidth} % Right column and width
+\begin{itemize}
+\item Implémente plusieurs algorithmes de fouille de données tels qu'Apriori, Close, Aclose, Carpathia, Charm, Next-Closure ou NFI-Simple.
+\item Simple d'utilisation, modulaire et documentation riche
+\item Code source non disponible
+\end{itemize}
+\end{columns}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{Librairie Java Lattices}
+La libraire \textit{Java Lattices}\footnote{\url{https://thegalactic.github.io/java-lattices}}~\parencite{Bertet2014} a été développée par le laboratoire L3i\footnote{Laboratoire Informatique, Image et Interaction, université de La Rochelle, France}.
+\begin{columns}[t]
+\column{.45\textwidth} % Left column and width
+\begin{itemize}
+\item Permet de générer des treillis de Galois et des règles d'association
+\item Code source libre et disponible sur la plate-forme GitHub
+\item Entièrement écrit avec Java
+\end{itemize}
+\column{.55\textwidth} % Right column and width
+\begin{itemize}
+\item La libraire est compatible avec Maven (outil Java pour gérer les dépendances)
+\item Client en ligne de commandes disponible
+\item Algorithme \emph{Limited Object Access (LOA)}~\parencite{Demko2011}
+\end{itemize}
+\end{columns}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{ToscanaJ}
+\emph{ToscanaJ}~\parencite{Becker2002} est une réimplémentation avec le langage de programmation Java de l'outil d'AFC connu sous le nom de <<~\emph{Toscana}~>>. Cet outil a la particularité d'être le premier outil à offrir l'affichage des diagrammes imbriqués (\emph{nested line diagrams}) comme on peut le voir avec la figure~\ref{cap:fig:toscanaj-nested}.
+\begin{figure}[H]
+\caption{ToscanaJ: Diagrammes imbriqués}
+\label{cap:fig:toscanaj-nested}
+\begin{center}\includegraphics[scale=0.17]{figures/toscanaj-nested.png}\end{center}
+\end{figure}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{Concept Explorer}
+\emph{Concept Explorer}\footnote{\url{http://conexp.sourceforge.net/}} (\emph{ConExp}) est un outil souvent utilisé par les chercheurs en AFC.
+\begin{itemize}
+\item Interface graphique complète en Java Swing
+\item Édition et transformation de contextes
+\item Construction de treillis de concepts
+\item Code distribué librement
+\item Base Guigues-Duquenne
+\item Génération des règles d'association et l'exploration des attributs
+\item Génération des relations flèches
+\end{itemize}
+Dans le cadre de ce mémoire, nous allons utiliser \emph{ConExp} à des fins de validation, notamment pour tester la procédure de production des relations flèches et pour la génération de la base de Guigues--Duquenne.
+
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{Concept Explorer}
+\begin{columns}[c]
+\column{.4\textwidth} % Left column and width
+\begin{figure}[H]
+\label{cap:fig:conexp-associations}
+\begin{center}\includegraphics[scale=0.45]{figures/conexp-associations.png}\end{center}
+\caption{\emph{ConExp}: Règles d'association}
+\end{figure}
+\column{.6\textwidth}
+\color{green!40!teal}
+\texttt{7 < 4 > b =[75\%]=> < 3 > f;} \\
+\color{black}
+Il s'agit de la 7-ème règle d'association laquelle indique que $b$ implique $f$ avec un support absolu de 3 parmi les six objets (et donc un support relatif de $50 \%$) et une confiance de $75 \%$.
+\end{columns}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{Concept Explorer}
+\begin{figure}[H]
+\begin{center}\includegraphics[scale=0.45]{figures/conexp-lattice.png}\end{center}
+\caption{\emph{ConExp}: Affichage du treillis}
+\label{cap:fig:conexp-lattice}
+\end{figure}
+\begin{itemize}
+\item L'affichage du treillis se fait selon un étiquetage réduit seulement.
+\item \emph{ConExp} utilise un algorithme de construction du treillis avec le minimum d'intersections et les collisions sont affichées en rouge.
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{\lm}
+\begin{itemize}
+\item Logiciel en Java pour la visualisation et la manipulation de treillis
+\item Intialement conçu par Geneviève Roberge dans le cadre de son mémoire de maîtrise.
+\item Continuellement enrichi par les membres de l'équipe et plusieurs stagiaires ingénieurs français.
+\item Aussi bien dans sa version initiale que dans sa version révisé, \lm est un logiciel libre disponible sur \emph{SourceForge}\footnote{\url{https://sourceforge.net/projects/lattice-miner/}} et GitHub\footnote{\url{https://github.com/LarimUQO/lattice-miner}}.
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{\lm}
+\begin{figure}[H]
+\caption{Génération du treillis de concepts dans \lm}
+\label{cap:fig:lm-treillis}
+\begin{center}\includegraphics[scale=0.32]{figures/lm-treillis.jpg}\end{center}
+\end{figure}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{\lm}
+\begin{figure}[H]
+\caption{Approximation dans \lm}
+\label{cap:fig:lm-approxime}
+\begin{center}\includegraphics[scale=0.22]{figures/Approxime.PNG}\end{center}
+\end{figure}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{\lm}
+\begin{figure}[H]
+\caption{Affichage de l'apposition d'un contexte avec son complémentaire}
+\label{cap:fig:lm-complem-ctx}
+\begin{center}\includegraphics[scale=0.45]{figures/lm-complem-ctx.jpg}\end{center}
+\end{figure}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{\lm}
+\begin{figure}[H]
+\caption{Base générique d'implications avec possibilité de redondance}
+\label{cap:fig:Imp-Red}
+\begin{center}\includegraphics[scale=0.45]{figures/ImplRed.png}\end{center}
+\end{figure}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{\lm}
+\begin{figure}[H]
+\caption{Base générique d'implications sans redondance}
+\label{cap:fig:Imp-NonRed}
+\begin{center}\includegraphics[scale=0.45]{figures/ImplNonRed.png}\end{center}
+\end{figure}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Les outils de l'analyse formelle de concepts}
+\framesubtitle{\lm}
+\begin{figure}[H]
+\caption{Relations flèches dans \lm}
+\label{cap:fig:lm-arrows}
+\begin{center}\includegraphics[scale=0.45]{figures/lm-arrow.jpg}\end{center}
+\end{figure}
+\end{frame}
+
+%------------------------------------------------
+\section{Production d'implications avec négation}
+%------------------------------------------------
+\begin{frame}
+\huge{\centerline{Production d'implications avec négation}}
+\end{frame}
+%------------------------------------------------
+
 %------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{References}
