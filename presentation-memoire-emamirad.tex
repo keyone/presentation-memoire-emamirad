@@ -108,8 +108,8 @@ est un formalisme de représentation des connaissances et de fouille de données
 \section{Rappels}
 %------------------------------------------------
 
-\begin{frame}[allowframebreaks]
-\frametitle{Rappels}
+\begin{frame}
+\frametitle{Rappels I}
 \begin{block}{Définition 1: Contexte formel}
 Soit $\KK = \GMI$ \emph{un contexte formel} où $G$, $M$ et $I$ sont respectivement un ensemble d'objets, une collection d'attributs et une relation binaire entre $G$ et $M$. L'expression $(g,m) \in I$ ou encore $gIm$ signifie que l'objet $g$ possède l'attribut $m$.
 \end{block}
@@ -136,6 +136,10 @@ Soit $\KK = \GMI$ \emph{un contexte formel} où $G$, $M$ et $I$ sont respectivem
 \label{cap:context-simple}
 \end{table}
 
+\end{frame}
+\begin{frame}
+\frametitle{Rappels II}
+
 \begin{block}{Définition 2: Concept formel}
 Un \emph{concept formel} $c$ est une paire d'ensembles $c:= (A,B)$ avec $A \subseteq G$, $B \subseteq M$, $A=B'$ et $B=A'$, où $A'$ est l'ensemble des attributs partagés par les objets dans $A$ et $B'$ est l'ensemble des objets ayant tous leurs attributs dans $B$. Les sous-ensembles $A$ et $B$ sont appelés respectivement l'extension et l'intention du concept $c$. Les valeurs de $A'$ et $B'$ sont obtenues comme suit : 
 $A':=\{m \in M \mid g I m\ \forall g \in A\}\ \text{et}\ B':=\{g \in G \mid g I m\ \forall~m \in B\}$.
@@ -146,7 +150,9 @@ $A':=\{m \in M \mid g I m\ \forall g \in A\}\ \text{et}\ B':=\{g \in G \mid g I 
 Un sous-ensemble $X$ est fermé si $X''=X$. Un concept objet pour l'objet $g$ est une paire de la forme $\gamma(g)=(g'', g')$ alors que le concept attribut pour l'attribut $m$ est $\mu(m)=(m', m'')$.
 Les sous-ensembles fermés de $G$ sont les extensions alors que les sous-ensembles fermés de $M$ sont les intentions de $\KK$.
 \end{block}
-
+\end{frame}
+\begin{frame}
+\frametitle{Rappels III}
 \begin{block}{Défintion 4: Treillis de concepts}
 Un \textit{treillis de concepts} $\CLGMI$ est un treillis résultant de l'ordre partiel existant entre les concepts du contexte $\KK = (G,M,I)$.
 $$(A,B) \leq (C,D) \Leftrightarrow A \subseteq C\ \text{et}\ D \subseteq B$$
@@ -156,12 +162,20 @@ $(A, B)$ est alors un sous-concept ou prédecesseur immédiat de $(C, D)$ alors 
 \begin{block}{Définition 5: Les bornes du treillis}
 La borne inférieure $\wedge$ (\emph{meet}) d'un ensemble de concepts $(X_i, Y_i)$ avec $i = 1, \ldots k$ est le plus grand des prédécesseurs communs. De même, la borne supérieure $\vee$ (\emph{join}) d'un ensemble de concepts est le petit des successeurs communs.
 \end{block}
-
-\begin{figure}
-\begin{center}\includegraphics[scale=0.55]{figures/exemple-treillis.png}\end{center}
+\end{frame}
+\begin{frame}
+\frametitle{Rappels IV}
+\begin{figure}[H]
+\begin{center}\includegraphics[scale=0.50]{figures/exemple-treillis.png}\end{center}
 \caption{Exemple de treillis de concepts pour le contexte du tableau \ref{cap:context-simple}}
 \end{figure}
+\end{frame}
+\begin{frame}
+\frametitle{Rappels V}
 
+\begin{block}{Block 3}
+On rappelle qu'un concept est dit \emph{sup-irréductible} (ou \emph{join-irréductible}) si et seulement si il possède un unique prédécesseur et il est dit \emph{inf-irréductible} (ou \emph{meet-irréductible}) s'il admet un unique successeur.
+\end{block}
 \end{frame}
 %------------------------------------------------
 
@@ -171,9 +185,7 @@ La borne inférieure $\wedge$ (\emph{meet}) d'un ensemble de concepts $(X_i, Y_i
 
 
 
-\begin{block}{Block 3}
-Suspendisse tincidunt sagittis gravida. Curabitur condimentum, enim sed venenatis rutrum, ipsum neque consectetur orci, sed blandit justo nisi ac lacus.
-\end{block}
+
 \end{frame}
 
 %------------------------------------------------
