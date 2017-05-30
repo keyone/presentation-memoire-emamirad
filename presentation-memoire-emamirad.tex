@@ -36,6 +36,7 @@ sorting=ynt
 \usepackage{caption}
 \usepackage[ruled,linesnumbered,french]{algorithm2e} 
 \usepackage[noend]{algorithmic-eng}
+\usepackage{extarrows}
 
 \WarningFilter{biblatex}{Patching footnotes failed}
 
@@ -161,12 +162,10 @@ Soit $\KK = \GMI$ \emph{un contexte formel} où $G$, $M$ et $I$ sont respectivem
 \frametitle{Rappels II}
 \framesubtitle{Analyse formelle de concepts}
 \begin{block}{Définition 2: Concept formel}
-Un \emph{concept formel} $c$ est une paire d'ensembles $c:= (A,B)$ avec $A \subseteq G$, $B \subseteq M$, $A=B'$ et $B=A'$, où $A'$ est l'ensemble des attributs partagés par les objets dans $A$ et $B'$ est l'ensemble des objets ayant tous leurs attributs dans $B$. Les sous-ensembles $A$ et $B$ sont appelés respectivement l'extension et l'intention du concept $c$. Les valeurs de $A'$ et $B'$ sont obtenues comme suit : 
-$A':=\{m \in M \mid g I m\ \forall g \in A\}\ \text{et}\ B':=\{g \in G \mid g I m\ \forall~m \in B\}$.
+Un \emph{concept formel} $c$ est une paire d'ensembles $c:= (A,B)$ avec $A \subseteq G$, $B \subseteq M$, $A=B'$ et $B=A'$, les sous-ensembles $A$ et $B$ sont appelés respectivement l'extension et l'intention du concept $c$.
 \end{block}
 \begin{block}{Défintion 3: Sous-ensemble fermé}
 Un sous-ensemble $X$ est fermé si $X''=X$. Un concept objet pour l'objet $g$ est une paire de la forme $\gamma(g)=(g'', g')$ alors que le concept attribut pour l'attribut $m$ est $\mu(m)=(m', m'')$.
-Les sous-ensembles fermés de $G$ sont les extensions alors que les sous-ensembles fermés de $M$ sont les intentions de $\KK$.
 \end{block}
 \end{frame}
 
@@ -179,9 +178,9 @@ Un \textit{treillis de concepts} $\CLGMI$ est un treillis résultant de l'ordre 
 $$(A,B) \leq (C,D) \Leftrightarrow A \subseteq C\ \text{et}\ D \subseteq B$$
 $(A, B)$ est alors un sous-concept ou prédécesseur immédiat de $(C, D)$ alors que ce dernier est un successeur de $(A, B)$.
 \end{block}
-\begin{block}{Définition 5: Les bornes du treillis}
-La borne inférieure $\wedge$ (\emph{meet}) d'un ensemble de concepts $(X_i, Y_i)$ avec $i = 1, \ldots k$ est le plus grand des prédécesseurs communs. De même, la borne supérieure $\vee$ (\emph{join}) d'un ensemble de concepts est le petit des successeurs communs.
-\end{block}
+% \begin{block}{Définition 5: Les bornes du treillis}
+% La borne inférieure $\wedge$ (\emph{meet}) d'un ensemble de concepts $(X_i, Y_i)$ avec $i = 1, \ldots k$ est le plus grand des prédécesseurs communs. De même, la borne supérieure $\vee$ (\emph{join}) d'un ensemble de concepts est le petit des successeurs communs.
+% \end{block}
 \end{frame}
 
 %------------------------------------------------
@@ -209,9 +208,9 @@ La borne inférieure $\wedge$ (\emph{meet}) d'un ensemble de concepts $(X_i, Y_i
 \begin{frame}
 \frametitle{Rappels VI}
 \framesubtitle{Analyse formelle de concepts}
-L'\emph{infimum} est le plus petit concept d'un treillis de Galois alors que le \emph{supremum} est son plus grand concept.
+% L'\emph{infimum} est le plus petit concept d'un treillis de Galois alors que le \emph{supremum} est son plus grand concept.
 
-Lorsqu'un concept $c_1$ est plus petit qu'un autre concept $c_2$, alors le nœud représentant $c_1$ est placé plus bas que son successeur $c_2$. Lorsqu'une relation d'ordre existe entre les concepts $c_1$ et $c_2$, on dit alors que ces concepts sont \textit{comparables} ($\leq$), sinon ils ne le sont pas ($\not\leq$).
+% Lorsqu'un concept $c_1$ est plus petit qu'un autre concept $c_2$, alors le nœud représentant $c_1$ est placé plus bas que son successeur $c_2$. Lorsqu'une relation d'ordre existe entre les concepts $c_1$ et $c_2$, on dit alors que ces concepts sont \textit{comparables} ($\leq$), sinon ils ne le sont pas ($\not\leq$).
 \begin{block}{Définition 6: sup-irréductible et inf-irréductible}
 On rappelle qu'un concept est dit \emph{sup-irréductible} (ou \emph{join-irréductible}) si et seulement si il possède un unique prédécesseur et il est dit \emph{inf-irréductible} (ou \emph{meet-irréductible}) s'il admet un unique successeur.
 \end{block}
@@ -290,7 +289,9 @@ $r$ est une règle approximative avec
 \frametitle{Rappels XI}
 \framesubtitle{Règles d'association et implications}
 \begin{block}{Définitions 11: pseudo-intent et base de Guigues-Duquenne}
-Un ensemble $P \subseteq M$ est un \emph{pseudo-intent} de $(G, M, I)$ ~\parencite{Ganter1999,Guigues1986} si et seulement si $P \neq P''$ et si $Q'' \subseteq P$ est vraie pour tout pseudo-intent $Q \subseteq P$, $Q \ne P.$ \\
+Un ensemble $P \subseteq M$ est un \emph{pseudo-intent} de $(G, M, I)$ 
+% ~\parencite{Ganter1999,Guigues1986} 
+si et seulement si $P \neq P''$ et si $Q'' \subseteq P$ est vraie pour tout pseudo-intent $Q \subseteq P$, $Q \ne P.$ \\
 L'ensemble des implications de la forme :
 $$\cal{L} := \{ P \rightarrow P''\ \backslash\ P\ |\ P\ \textit{pseudo-intent}\ \}$$
 est appelé base de Guigues-Duquenne (\emph{stem base}) et reconnue comme étant minimale.
@@ -310,16 +311,16 @@ est appelé base de Guigues-Duquenne (\emph{stem base}) et reconnue comme étant
 \end{frame}
 
 %------------------------------------------------
-\begin{frame}
-\frametitle{Rappels XIII}
-\framesubtitle{Règles d'association et implications}
-\begin{block}{Définition 12: contexte complémentaire  $\KKn$}
-Soit un contexte $\KK = \GMI$ décrivant un ensemble $G$ d’objets, un ensemble $M$ de propriétés (attributs) et une relation binaire $I$ entre $G$ et $M$. Le contexte complémentaire de $\KK$ est $\KKn = (G, \tilde{M}, G \times M \backslash I)$ avec $\tilde{M}$ l'ensemble des attributs négatifs.
-\end{block}
-\begin{block}{Définition 13: apposition du contexte $\KK$ avec son complémentaire $\KKn$}
-Le contexte $\KKc$ est l'apposition du contexte $\KK$ avec son complémentaire $\KKn$. Cela signifie que $\KKc:= (G, M \cup \tilde{M}, I \cup G \times M \backslash I)$.
-\end{block}
-\end{frame}
+% \begin{frame}
+% \frametitle{Rappels XIII}
+% \framesubtitle{Règles d'association et implications}
+% \begin{block}{Définition 12: contexte complémentaire  $\KKn$}
+% Soit un contexte $\KK = \GMI$ décrivant un ensemble $G$ d’objets, un ensemble $M$ de propriétés (attributs) et une relation binaire $I$ entre $G$ et $M$. Le contexte complémentaire de $\KK$ est $\KKn = (G, \tilde{M}, G \times M \backslash I)$ avec $\tilde{M}$ l'ensemble des attributs négatifs.
+% \end{block}
+% \begin{block}{Définition 13: apposition du contexte $\KK$ avec son complémentaire $\KKn$}
+% Le contexte $\KKc$ est l'apposition du contexte $\KK$ avec son complémentaire $\KKn$. Cela signifie que $\KKc:= (G, M \cup \tilde{M}, I \cup G \times M \backslash I)$.
+% \end{block}
+% \end{frame}
 
 %------------------------------------------------
 \begin{frame}
@@ -438,24 +439,24 @@ Quelques fonctionnalités de Galicia:
 
 \end{frame}
 %------------------------------------------------
-\begin{frame}
-\frametitle{Les outils de l'analyse formelle de concepts}
-\framesubtitle{\textsc{Galicia}}
-\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
-\column{.4\textwidth} % Left column and width
-\begin{figure}[H]
-\label{fig:galicia-ctx}
-\begin{center}\includegraphics[scale=0.28]{figures/galicia1.jpg}\end{center}
-\caption{Éditeur de contexte}
-\end{figure}
-\column{.6\textwidth} % Right column and width
-\begin{figure}[H]
-\begin{center}\includegraphics[scale=0.30]{figures/galicia-full-labeling.png}\end{center}
-\caption{Treillis Galicia avec étiquetage complet}
-\label{cap:fig:galicia-full-label}
-\end{figure}
-\end{columns}
-\end{frame}
+% \begin{frame}
+% \frametitle{Les outils de l'analyse formelle de concepts}
+% \framesubtitle{\textsc{Galicia}}
+% \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+% \column{.4\textwidth} % Left column and width
+% \begin{figure}[H]
+% \label{fig:galicia-ctx}
+% \begin{center}\includegraphics[scale=0.28]{figures/galicia1.jpg}\end{center}
+% \caption{Éditeur de contexte}
+% \end{figure}
+% \column{.6\textwidth} % Right column and width
+% \begin{figure}[H]
+% \begin{center}\includegraphics[scale=0.30]{figures/galicia-full-labeling.png}\end{center}
+% \caption{Treillis Galicia avec étiquetage complet}
+% \label{cap:fig:galicia-full-label}
+% \end{figure}
+% \end{columns}
+% \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Les outils de l'analyse formelle de concepts}
@@ -526,23 +527,23 @@ Dans le cadre de ce mémoire, nous allons utiliser \emph{ConExp} à des fins de 
 
 \end{frame}
 %------------------------------------------------
-\begin{frame}
-\frametitle{Les outils de l'analyse formelle de concepts}
-\framesubtitle{Concept Explorer}
-\begin{columns}[c]
-\column{.4\textwidth} % Left column and width
-\begin{figure}[H]
-\label{cap:fig:conexp-associations}
-\begin{center}\includegraphics[scale=0.45]{figures/conexp-associations.png}\end{center}
-\caption{\emph{ConExp}: Règles d'association}
-\end{figure}
-\column{.6\textwidth}
-\color{green!40!teal}
-\texttt{7 < 4 > b =[75\%]=> < 3 > f;} \\
-\color{black}
-Il s'agit de la 7-ème règle d'association laquelle indique que $b$ implique $f$ avec un support absolu de 3 parmi les six objets (et donc un support relatif de $50 \%$) et une confiance de $75 \%$.
-\end{columns}
-\end{frame}
+% \begin{frame}
+% \frametitle{Les outils de l'analyse formelle de concepts}
+% \framesubtitle{Concept Explorer}
+% \begin{columns}[c]
+% \column{.4\textwidth} % Left column and width
+% \begin{figure}[H]
+% \label{cap:fig:conexp-associations}
+% \begin{center}\includegraphics[scale=0.45]{figures/conexp-associations.png}\end{center}
+% \caption{\emph{ConExp}: Règles d'association}
+% \end{figure}
+% \column{.6\textwidth}
+% \color{green!40!teal}
+% \texttt{7 < 4 > b =[75\%]=> < 3 > f;} \\
+% \color{black}
+% Il s'agit de la 7-ème règle d'association laquelle indique que $b$ implique $f$ avec un support absolu de 3 parmi les six objets (et donc un support relatif de $50 \%$) et une confiance de $75 \%$.
+% \end{columns}
+% \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Les outils de l'analyse formelle de concepts}
@@ -707,7 +708,6 @@ M\tilde{M}\backslash Ax$ ont un support nécessairement nul puisque même si un 
 \begin{columns}[t] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
 \column{.45\textwidth} % Left column and width
 \begin{figure}[h]
-\label{cap:fig:negctx}
 \begin{center}
 \begin{cxt}%
 \cxtName{}%
@@ -764,21 +764,21 @@ M\tilde{M}\backslash Ax$ ont un support nécessairement nul puisque même si un 
 \end{table}
 \end{frame}
 %------------------------------------------------
-\begin{frame}
-\frametitle{Production d'implications avec négation}
-\framesubtitle{Calcul du support des implications}
-Le support de chaque implication $ Y \rightarrow Z$ se calcule avec la formule suivante:
-\begin{equation} \label{eq:support_t}
-Sup(T)= \sum_{PT(T)~\subseteq~U~\subseteq T} (-1)^{n(U)}\times Sup(P(U))
-\end{equation}
-\begin{itemize}
-\item  $T = Y\cup Z$ représente l'ensemble de tous les attributs positifs et négatifs de l'implication
-\item  $Sup(T)$ est le support de $T$,
-\item $PT(T)$ est l'ensemble des éléments positifs dans $T$,
-\item $n(T)$ est le nombre d'éléments négatifs dans $T$, et 
-\item $P(U)$ représente l'ensemble des attributs dans $U$ exprimés en éléments positifs.
-\end{itemize}
-\end{frame}
+% \begin{frame}
+% \frametitle{Production d'implications avec négation}
+% \framesubtitle{Calcul du support des implications}
+% Le support de chaque implication $ Y \rightarrow Z$ se calcule avec la formule suivante:
+% \begin{equation} \label{eq:support_t}
+% Sup(T)= \sum_{PT(T)~\subseteq~U~\subseteq T} (-1)^{n(U)}\times Sup(P(U))
+% \end{equation}
+% \begin{itemize}
+% \item  $T = Y\cup Z$ représente l'ensemble de tous les attributs positifs et négatifs de l'implication
+% \item  $Sup(T)$ est le support de $T$,
+% \item $PT(T)$ est l'ensemble des éléments positifs dans $T$,
+% \item $n(T)$ est le nombre d'éléments négatifs dans $T$, et 
+% \item $P(U)$ représente l'ensemble des attributs dans $U$ exprimés en éléments positifs.
+% \end{itemize}
+% \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Production d'implications avec négation}
@@ -796,10 +796,148 @@ Sup(T)= \sum_{PT(T)~\subseteq~U~\subseteq T} (-1)^{n(U)}\times Sup(P(U))
 \large{\centerline{Enrichissement du module de génération des règles triadiques}}
 \end{frame}
 %------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Analyse triadique de concepts}
+L'analyse triadique de concepts a été introduite par \parencite{Lehmann1995} comme une extension à l'analyse formelle de concepts.
+\begin{block}{Définition 17: Contexte triadique}
+Soit un contexte triadique $\KK:=(K_1, K_2, K_3, Y)$ 
+\begin{itemize}
+\item avec $K_1$, $K_2$ et $K_3$ représentant respectivement un ensemble d'objets, un ensemble d'attributs et un ensemble de conditions, et
+\item $Y\subseteq K_1{\times}K_2{\times}K_3$ une relation ternaire entre les trois ensembles.
+\end{itemize}
+Le triplet $(a_1, a_2, a_3)$ dans $Y$ signifie que l'objet $a_1$ possède l'attribut $a_2$ sous la condition $a_3$ (voir le tableau~\ref{Tab:TC}). 
+\end{block}
+Le but d'une telle analyse est d'identifier des concepts et des implications triadiques.
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Analyse triadique de concepts}
+\begin{table}[H]
+\scriptsize
+\begin{center}
+\begin{tabular}{|c| p{20pt} | p{20pt} | p{20pt} | p{20pt} | p{20pt} |}\hline
+ ~ $\KK$ ~& ~ ~P~ &  ~ ~N~ & ~ ~R~  &  ~ ~K~ & ~ ~ S~  \\
+ &  &  &  &   &   \\ \hline
+1 & ~abd~ & ~abd~ & ~ac~ & ~ab~ & ~a~  \\
+2 & ~ad~ & ~bcd~ & ~abd~ & ~ad~ & ~d ~ \\
+3 & ~abd~ & ~d~ & ~ab~ & ~ab~ & ~a~  \\
+4 & ~abd~  & ~bd~ & ~ab~ & ~ab~ & ~d~ \\
+5 & ~ad~  & ~ad~ & ~abd~ & ~abc~ & ~a~ \\\hline
+\end{tabular}
+\caption{Un contexte triadique $\KK:=(K_1, K_2, K_3, Y)$}
+\label{Tab:TC}
+\end{center}
+\end{table}
+% Il y a cinq clients qui achètent auprès de cinq fournisseurs (\textbf{P}ierre, \textbf{N}elson, \textbf{R}ichard, \textbf{K}evin et \textbf{S}imon) des produits. Ces produits sont des \textbf{a}ccessoires, livres (\textit{\textbf{b}ooks}), ordinateurs (\textit{\textbf{c}omputers}) et caméras (\textit{\textbf{d}igital cameras}).
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Analyse triadique de concepts}
+\begin{block}{Définition 18: Concept triadique}
+Un concept triadique d'un contexte $\KK:=(K_1,K_2,K_3,Y)$ 
+ est un triplet $(A_1, A_2, A_3)$ avec $A_1 \subseteq K_1$, $A_2 \subseteq K_2$, $A_3 \subseteq K_3$ et  $A_1{\times}A_2{\times}A_3\subseteq Y$. Il représente un cuboïde plein de 1. Les sous-ensembles $A_1$, $A_2$ et $A_3$ sont appelés respectivement l'extension, l'intention et le mode (\emph{modus}) du concept.
+\end{block}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Implications triadiques}
+\begin{block}{Définition 19: Implications triadiques~\parencite{Biedermann1997}}
+Une implication triadique de la forme $(A \rightarrow D)_C$ est vraie si chaque fois que $A$ se produit pour l'ensemble des conditions dans $C$, alors $D$ se produit également dans les mêmes conditions. 
+\end{block}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Implications triadiques \parencite{Ganter2004}}
+\begin{block}{Définition 19: Implication \emph{attribut}${\times}$\emph{condition}}
+Une implication \emph{attribut}${\times}$\emph{condition} (AxCI) a la forme $A \rightarrow D$, avec $A, D$ des sous-ensembles de $K_2 {\times} K_3$.
+De telles implications sont extraites du contexte binaire $\KK^{(1)}:= (K_1, K_2 {\times} K_3, Y^{(1)})$ où $(a_i, (a_j, a_k)) \in Y^{(1)} : \Leftrightarrow (a_i, a_j, a_k) \in
+Y$.
+\end{block}
+\begin{table}[H]
+\centering \small
+\tiny
+\begin{tabular}{|l|llll|llll|llll|llll|llll|}
+\hline
+ $\KK^{(1)}$  &\multicolumn{4}{l|}{ ~ ~P}&\multicolumn{4}{l|}{ ~ ~N}&\multicolumn{4}{l|}{ ~ ~R}&\multicolumn{4}{l|}{ ~ ~K}&\multicolumn{4}{l|}{ ~ ~S}\\
+\cline{2-21}
+      & a & b & c & d & a & b & c & d & a & b & c & d & a & b & c & d & a & b & c & d   \\
+      \hline
+      ~1 ~ &  1 &  1  &  ~  &  1  &  1  & 1  &  ~  &  1  &  1 &  ~  &  1  &  ~  &  1  &  1  &  ~  &  ~  & 1  &  ~  &  ~ &  ~ \\
+      ~2~ &  1  &  ~  &  ~  &  1  &  ~  &  1  &  1  &  1  &  1 &  1  &  ~  &  1  & 1  &  ~  &  ~  &  1  &  ~  &  ~  &  ~ &  1\\
+      ~3~ &  1  &  1  &  ~  &  1  &  ~  &  ~  &  ~  &  1  &  1 &  1  &  ~  &  ~  &  1  &  1  &  ~  &  ~  &  1  &  ~  &  ~ &  ~ \\
+      ~4 ~&  1  &  1  &  ~  &  1  &  ~  &  1  &  ~  &  1  &  1  &  1  &  ~  &  ~  &  1  &  1  &  ~  &  ~  &  ~  &  ~ &  ~ & 1\\
+      ~5~ &  1  &  ~  &  ~  &  1  &  1  &  ~  &  ~  &  1  &  1  &  1  &  ~  &  1  &  1  &  1  &  1  &  ~  &  1  &  ~ &  ~ &  ~\\
+
+      \hline
+\end{tabular}
+\caption{Contexte dyadique $\KK^{(1)}:= (K_1, K_2 \times K_3, Y^{(1)})$ 
+extrait de $\KK$}
+\label{Tab:K1}
+\end{table}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Implications triadiques \parencite{Ganter2004}}
+\begin{block}{Définition 20: Implication \emph{attributs conditionnels} (CAI)}
+Une implication d'\emph{attributs conditionnels} (CAI) est de la forme 
+$A \xlongrightarrow{C} D$
+\begin{itemize}
+\item avec $A$ et $D$ des sous-ensembles de $K_2$,
+\item et $C$ un sous-ensemble de $K_3$. 
+\end{itemize}
+L'implication signifie que \emph{$A$ implique $D$ pour la totalité ou tout sous-ensemble des conditions de $C$}. Une telle implication est alors liée à la définition de l'implication triadique de Biedermann comme suit: $A \xlongrightarrow{C} D \Longleftrightarrow$  $(A \rightarrow D)_{C_1}$ pour tout $C_1 \subseteq C$, y compris pour tout élément atomique de $C$. 
+\end{block}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Implications triadiques \parencite{Ganter2004}}
+\begin{block}{Définition 21: Implication \emph{conditions attributionnels} (ACI)}
+Une implication de type conditions attributionnels (ACI) est de la forme $A \xlongrightarrow{C} D$, où $A$ et $D$ sont des sous-ensembles de $K_3$, et $C$ est un sous-ensemble de $K_2$.
+\end{block}
+\begin{block}{Définition 22: Règle d'association d'attributs conditionnels à la Biedermann (BCAAR)}
+Une règle BCAAR $(A \rightarrow D)_C$ $[s, c]$ est vraie si chaque fois que $A \subseteq K_2$ est vraie sous l'ensemble de conditions (et non nécessairement un sous-ensemble de) $C \subseteq K_3$, alors $D \subseteq K_2$ est vraie pour $C$ avec un support $s$ et une confiance $c$.
+\end{block}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Algorithme de calcul des implications triadiques CAI et ACI}
+En partant de la définition même d'une implication CAI qui indique que $A \xlongrightarrow{C} D$ est vraie ssi $(A \rightarrow D)_k$ pour tout $k \in C$, nous allons procéder comme suit:
+\begin{enumerate}
+	\item créer autant de contextes dyadiques qu'il y a de conditions dans $K_3$
+	\item calculer les implications à la Biedermann au niveau des chacune des conditions
+	\item placer les implications avec un même antécédent dans un même baquet (\emph{bucket}) puis décomposer chaque implication avec $p$ attributs dans la conclusion en $p$ implications avec un seul attribut dans la conséquence 
+	\item cumuler les conditions pour toutes les implications ayant le même antécédent et la même conséquence
+	\item regrouper les conclusions des implications ayant le même antécédent
+	\item calculer le support des implications obtenues.		
+\end{enumerate}
+\end{frame}
+%------------------------------------------------
+% \begin{frame}
+% \begin{columns}[t]
+% \column{.5\textwidth} % Left column and width
+% \begin{figure}
+% \includegraphics[scale=0.30]{figures/Triadic.jpg}
+% \end{figure}
+
+% \column{.45\textwidth} % Left column and width
+% Toutes ses variantes d'implications triadiques et de règles d'association sont produites par notre outil en utilisant nos procédures définies précédemment.
+
+% \end{columns}
+
+% \end{frame}
+%------------------------------------------------
 \section{Conclusion}
 \begin{frame}
 \frametitle{Conclusion}
-Revue des contributions:
+Contributions:
 \begin{itemize}
 \item Vérification des procédures de la base d'implications de Guigues-Duquenne;
 \item Vérification des procédures de calcul des relations de flèches;
