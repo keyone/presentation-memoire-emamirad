@@ -66,7 +66,9 @@ sorting=ynt
 Université du Québec en Outaouais \\ % Your institution for the title page
 Département d’informatique et d’ingénierie \\
 \medskip
-\textit{emak01@uqo.ca} % Your email address
+\textit{emak01@uqo.ca} \\% Your email address
+\medskip
+Sous la supérvision de Prof. Rokia Missaoui \\
 }
 \date{mercredi 31 mai 2017} % Date, can be changed to a custom date
 
@@ -162,13 +164,23 @@ Soit $\KK = \GMI$ \emph{un contexte formel} où $G$, $M$ et $I$ sont respectivem
 \frametitle{Rappels II}
 \framesubtitle{Analyse formelle de concepts}
 \begin{block}{Définition 2: Concept formel}
-Un \emph{concept formel} $c$ est une paire d'ensembles $c:= (A,B)$ avec $A \subseteq G$, $B \subseteq M$, $A=B'$ et $B=A'$, les sous-ensembles $A$ et $B$ sont appelés respectivement l'extension et l'intention du concept $c$.
-\end{block}
-\begin{block}{Défintion 3: Sous-ensemble fermé}
-Un sous-ensemble $X$ est fermé si $X''=X$. Un concept objet pour l'objet $g$ est une paire de la forme $\gamma(g)=(g'', g')$ alors que le concept attribut pour l'attribut $m$ est $\mu(m)=(m', m'')$.
+Un \emph{concept formel} $c$ est une paire d'ensembles $c:= (A,B)$ avec $A \subseteq G$, $B \subseteq M$, $A=B'$ et $B=A'$, où $A'$ est l'ensemble des attributs partagés par les objets dans $A$ et $B'$ est l'ensemble des objets ayant tous leurs attributs dans $B$. Les sous-ensembles $A$ et $B$ sont appelés respectivement l'extension et l'intention du concept $c$. Les valeurs de $A'$ et $B'$ sont obtenues comme suit : 
+$A':=\{m \in M \mid g I m\ \forall g \in A\}\ \text{et}\ B':=\{g \in G \mid g I m\ \forall~m \in B\}$.
 \end{block}
 \end{frame}
 
+
+\begin{frame}
+\frametitle{Rappels}
+\framesubtitle{Analyse formelle de concepts}
+\begin{block}{Défintion 3: Sous-ensemble fermé}
+Un sous-ensemble $X$ est fermé si $X''=X$. Un concept objet pour l'objet $g$ est une paire de la forme $\gamma(g)=(g'', g')$ alors que le concept attribut pour l'attribut $m$ est $\mu(m)=(m', m'')$.
+\end{block}
+\begin{itemize}
+  \item La paire $(\{3\}, \{c, d\})$ forme un concept objet pour $3$ car  $\gamma(3)=(3'', 3')= (\{3\}, \{c, d\})$.
+  \item La paire $\mu(e)=(e', e'')=(\{1, 6\}, \{a, e\})$ forme un concept attribut pour $e$.
+\end{itemize}
+\end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Rappels III}
@@ -211,47 +223,65 @@ $(A, B)$ est alors un sous-concept ou prédécesseur immédiat de $(C, D)$ alors
 % L'\emph{infimum} est le plus petit concept d'un treillis de Galois alors que le \emph{supremum} est son plus grand concept.
 
 % Lorsqu'un concept $c_1$ est plus petit qu'un autre concept $c_2$, alors le nœud représentant $c_1$ est placé plus bas que son successeur $c_2$. Lorsqu'une relation d'ordre existe entre les concepts $c_1$ et $c_2$, on dit alors que ces concepts sont \textit{comparables} ($\leq$), sinon ils ne le sont pas ($\not\leq$).
-\begin{block}{Définition 6: sup-irréductible et inf-irréductible}
+\begin{block}{Définition 5: sup-irréductible et inf-irréductible}
 On rappelle qu'un concept est dit \emph{sup-irréductible} (ou \emph{join-irréductible}) si et seulement si il possède un unique prédécesseur et il est dit \emph{inf-irréductible} (ou \emph{meet-irréductible}) s'il admet un unique successeur.
 \end{block}
+\begin{itemize}
+  \item Par exemple, le concept $(245, bf)$ est \emph{inf-irréductible} c'est un concept attribut.
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
 \begin{frame}
 \frametitle{Rappels VII}
 \framesubtitle{Règles d'association et implications}
-\begin{block}{Définition 7: règle d'association}
+\begin{block}{Définition 6: règle d'association}
 $$r : Y \rightarrow Z\ [sup, conf]$$
 $r$ est une règle d'association avec
 \begin{itemize}
 \item $Y$ et $Z$ sont des sous-ensembles d'attributs appelés \textit{itemsets},
 \item $Y \cap Z = \emptyset$,
 \item \textit{sup}, le support est $Prob(Y \cup Z)$ (proportion des objets ayant simultanément les attributs $Y$ et $Z$), et
-\item \textit{conf}, la confiance est $Prob(Y \cup Z)$ (probabilité d'avoir $Z$ lorsque $Y$ est présent dans le contexte \context).
+\item \textit{conf}, la confiance est $Prob(Z/Y)$ (probabilité d'avoir $Z$ lorsque $Y$ est présent dans le contexte \context).
 \end{itemize}
 \end{block}
+\begin{itemize}
+  \item Par exemple, $\{e\} \rightarrow \{a\}\ [33\%,100\%]$ 
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
 \begin{frame}
 \frametitle{Rappels VIII}
 \framesubtitle{Règles d'association et implications}
-\begin{block}{Définitions 8: itemsets et générateurs}
+\begin{block}{Définitions 7: itemsets et générateurs}
 \begin{itemize}
 \item Un \emph{itemset} est dit \emph{fréquent} si la proportion d'objets le possédant est au moins égale au support minimum défini par l'utilisateur.
 \item Un \emph{itemset} $Y$ est dit \emph{fermé} si $Y = Y''$. Cela signifie que $Y$ est une intention d'un concept formel.
-\item Un \emph{générateur} $G$ \parencite{Pfaltz2002} d'un itemset fermé (intention) $Y$ est un ensemble minimal de  $Y$
-tel que $G''= Y$. 
+\item Un \emph{générateur} $Y$ \parencite{Pfaltz2002, Pasquier1999} d'un itemset fermé (intention) $Z$ est un ensemble minimal de  $Z$ tel que $Y''= Z$.
 \end{itemize}
 \end{block}
+\begin{itemize}
+  \item Par exemple, $\{e\}$ est un générateur de $\{a,e\}$, on a donc $\{e\} \rightarrow \{a\}\ [33\%,100\%]$.
+\end{itemize}
 \end{frame}
 
+%------------------------------------------------
+\begin{frame}
+\frametitle{Rappels XII}
+\framesubtitle{Règles d'association et implications}
+\begin{figure}[H]
+\label{cap:fig:treillis-gen}
+\begin{center}\includegraphics[scale=0.36]{figures/Treillis21FullLabelGen.png}\end{center}
+\caption{Treillis de concepts avec indication des générateurs}
+\end{figure}
+\end{frame}
 
 %------------------------------------------------
 \begin{frame}
 \frametitle{Rappels IX}
 \framesubtitle{Règles d'association et implications}
-\begin{block}{Définition 9: implication et base générique}
+\begin{block}{Définition 8: implication et base générique}
 $$r: g_i \rightarrow Int(c)\ \backslash\ g_i $$
 $r$ est une implication ou règle exacte avec
 \begin{itemize}
@@ -270,7 +300,7 @@ Une base générique \parencite{Pasquier1999} d'implications est une représenta
 \begin{frame}
 \frametitle{Rappels X}
 \framesubtitle{Règles d'association et implications}
-\begin{block}{Définition 10: règle approximative}
+\begin{block}{Définition 9: règle approximative}
 $$r: g_i \rightarrow Int(c_j)\backslash Int(c) $$
 $r$ est une règle approximative avec
 \begin{itemize}
@@ -282,13 +312,16 @@ $r$ est une règle approximative avec
 \item  \emph{confiance}$(r) = $\emph{support}$(c_j)/support(c)$
 \end{itemize}
 \end{block}
+\begin{itemize}
+  \item Par exemple, $\{b\} \rightarrow \{f\}\ [50\%,75\%]$
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
 \begin{frame}
 \frametitle{Rappels XI}
 \framesubtitle{Règles d'association et implications}
-\begin{block}{Définitions 11: pseudo-intent et base de Guigues-Duquenne}
+\begin{block}{Définitions 10: pseudo-intent et base de Guigues-Duquenne}
 Un ensemble $P \subseteq M$ est un \emph{pseudo-intent} de $(G, M, I)$ 
 % ~\parencite{Ganter1999,Guigues1986} 
 si et seulement si $P \neq P''$ et si $Q'' \subseteq P$ est vraie pour tout pseudo-intent $Q \subseteq P$, $Q \ne P.$ \\
@@ -297,17 +330,6 @@ $$\cal{L} := \{ P \rightarrow P''\ \backslash\ P\ |\ P\ \textit{pseudo-intent}\ 
 est appelé base de Guigues-Duquenne (\emph{stem base}) et reconnue comme étant minimale.
 \end{block}
 À titre d'exemple, $\{a, c\}$ est un pseudo-intent dont le fermé est $\{a, c, e\}$, d'où l'implication $\{a, c\} \rightarrow \{e\}$
-\end{frame}
-
-%------------------------------------------------
-\begin{frame}
-\frametitle{Rappels XII}
-\framesubtitle{Règles d'association et implications}
-\begin{figure}[H]
-\label{cap:fig:treillis-gen}
-\begin{center}\includegraphics[scale=0.36]{figures/Treillis21FullLabelGen.png}\end{center}
-\caption{Treillis de concepts avec indication des générateurs}
-\end{figure}
 \end{frame}
 
 %------------------------------------------------
@@ -353,13 +375,16 @@ est appelé base de Guigues-Duquenne (\emph{stem base}) et reconnue comme étant
 \end{center}
 \caption{$\mathbb{K}|\tilde{\mathbb{K}}$ : apposition du contexte $\KK$ avec son complémentaire $\KKn$}
 \end{figure}
+\begin{itemize}
+  \item Le contexte complémentaire de $\KK$ est $\KKn = (G, \tilde{M}, G \times M \backslash I)$ avec $\tilde{M}$ l'ensemble des attributs négatifs.
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
 \begin{frame}
 \frametitle{Rappels XV}
 \framesubtitle{Relations flèches}
-\begin{block}{Définition 14: Relations flèches}
+\begin{block}{Définition 11: Relations flèches}
 La relation entre l'objet $g$ et l'attribut $m$ dans un contexte formel se présente sous l'une des quatre formes suivantes~:
 \begin{itemize}
 \item $g \updownarrow m$ si $\gamma(g) \not\leq \mu(m)$, $\gamma(g) \leq m^+$, et $g^- \leq \mu(m)$
@@ -522,9 +547,8 @@ La libraire \textit{Java Lattices}\footnote{\url{https://thegalactic.github.io/j
 \item Base Guigues-Duquenne
 \item Génération des règles d'association et l'exploration des attributs
 \item Génération des relations flèches
+\item Réduction du contexte
 \end{itemize}
-Dans le cadre de ce mémoire, nous allons utiliser \emph{ConExp} à des fins de validation, notamment pour tester la procédure de production des relations flèches et pour la génération de la base de Guigues--Duquenne.
-
 \end{frame}
 %------------------------------------------------
 % \begin{frame}
@@ -653,6 +677,18 @@ Les implications appartiennent à une des catégories suivantes~:
 \item implications \emph{mixtes} tel que $M \cap (Y \cup Z) \ne \emptyset$ et $\tilde{M} \cap (Y \cup Z) \ne \emptyset$.
 \end{itemize}
 \end{block}
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+\column{.5\textwidth} % Left column and width
+\begin{itemize}
+  \item $\{b'\} \rightarrow \{d'\}$ est \emph{purement négative}
+  \item $\{b,c,e'\} \rightarrow \{a'\}$ est \emph{mixte}
+\end{itemize}
+\column{.5\textwidth} % Left column and width
+\begin{itemize}
+  \item $\{e\} \rightarrow \{c\}$ est \emph{purement positive}
+  \item La confiance est de 100\%.
+\end{itemize}
+\end{columns}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
@@ -664,6 +700,9 @@ $$r: Y \rightarrow M \cup \tilde{M} \backslash Y \ [0]$$
 \item Le support d'une telle implication est évidemment nul car il n'existe aucun itemset $Y$ impliquant tous les attributs dans $M \cup \tilde{M}$.
 \end{itemize}
 \end{block}
+\begin{itemize}
+  \item $\{c',d\}$ est une clé, on n'a jamais $c'$ et $d$ en même temps.
+\end{itemize}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
@@ -675,14 +714,18 @@ M\tilde{M}\backslash Ax~[0]$
    $\Leftrightarrow$ $A \rightarrow \tilde{x}~[sup]$ avec $sup=|A'| / |G|$ où $A'$ est l'ensemble d'objets possédant les attributs contenus dans $A$ et $G$ est l'ensemble des objets du contexte $\KK$.
  \label{axiom1}
 \end{theorem}
-Ces implications avec clé de la forme $Ax \rightarrow
-M\tilde{M}\backslash Ax$ ont un support nécessairement nul puisque même si un objet possède tous les attributs dans $M$, il n'en possède aucun dans $\tilde{M}$.
+\begin{itemize}
+  \item Ces implications avec clé de la forme $Ax \rightarrow M\tilde{M}\backslash Ax$ ont un support nécessairement nul puisque même si un objet possède tous les attributs dans $M$, il n'en possède aucun dans $\tilde{M}$.
+  \item On déplace un attribut à la fois.
+  \item Par exemple, $\{c',e\}$ nous donne les implications $\{e\} \rightarrow \{c\}$ et $\{c'\} \rightarrow \{e'\}$
+
+\end{itemize}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Production d'implications avec négation}
 \begin{algorithm}[H]
-\caption{Génération des clés de l'infimum du treillis à partir de \context}
+\caption{Génération des clés de l'infimum du treillis $\KKc$}
 \begin{algorithmic}[1]
 \STATE \textbf{Procédure}
 \STATE \textbf{Entrée:} Contexte initial $\KK:= (G,M,I)$
@@ -814,6 +857,18 @@ Le but d'une telle analyse est d'identifier des concepts et des implications tri
 \begin{frame}
 \frametitle{Enrichissement du module de génération des règles triadiques}
 \framesubtitle{Analyse triadique de concepts}
+\begin{block}{Définition 18: Concept triadique}
+Un concept triadique d'un contexte $\KK:=(K_1,K_2,K_3,Y)$ 
+ est un triplet $(A_1, A_2, A_3)$ avec $A_1 \subseteq K_1$, $A_2 \subseteq K_2$, $A_3 \subseteq K_3$ et  $A_1{\times}A_2{\times}A_3\subseteq Y$. Il représente un cuboïde plein de 1. Les sous-ensembles $A_1$, $A_2$ et $A_3$ sont appelés respectivement l'extension, l'intention et le mode (\emph{modus}) du concept.
+\end{block}
+\begin{itemize}
+  \item Par exemple, $(12345, PRK, a)$ et $(14, PN, bd)$ sont des concepts triadiques. 
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Analyse triadique de concepts}
 \begin{table}[H]
 \scriptsize
 \begin{center}
@@ -829,17 +884,12 @@ Le but d'une telle analyse est d'identifier des concepts et des implications tri
 \caption{Un contexte triadique $\KK:=(K_1, K_2, K_3, Y)$}
 \label{Tab:TC}
 \end{center}
+ \begin{itemize}
+   \item $(12345,PRK, a)$ et $(14, PN, bd)$ sont des concepts
+   \item $(135, PN, d)$ n'est pas un concept car il est non maximal puisque son extension peut être augmentée pour aboutir au concept $(12345, PN, d)$ tout en respectant la relation ternaire.
+ \end{itemize}
 \end{table}
 % Il y a cinq clients qui achètent auprès de cinq fournisseurs (\textbf{P}ierre, \textbf{N}elson, \textbf{R}ichard, \textbf{K}evin et \textbf{S}imon) des produits. Ces produits sont des \textbf{a}ccessoires, livres (\textit{\textbf{b}ooks}), ordinateurs (\textit{\textbf{c}omputers}) et caméras (\textit{\textbf{d}igital cameras}).
-\end{frame}
-%------------------------------------------------
-\begin{frame}
-\frametitle{Enrichissement du module de génération des règles triadiques}
-\framesubtitle{Analyse triadique de concepts}
-\begin{block}{Définition 18: Concept triadique}
-Un concept triadique d'un contexte $\KK:=(K_1,K_2,K_3,Y)$ 
- est un triplet $(A_1, A_2, A_3)$ avec $A_1 \subseteq K_1$, $A_2 \subseteq K_2$, $A_3 \subseteq K_3$ et  $A_1{\times}A_2{\times}A_3\subseteq Y$. Il représente un cuboïde plein de 1. Les sous-ensembles $A_1$, $A_2$ et $A_3$ sont appelés respectivement l'extension, l'intention et le mode (\emph{modus}) du concept.
-\end{block}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
@@ -848,6 +898,9 @@ Un concept triadique d'un contexte $\KK:=(K_1,K_2,K_3,Y)$
 \begin{block}{Définition 19: Implications triadiques~\parencite{Biedermann1997}}
 Une implication triadique de la forme $(A \rightarrow D)_C$ est vraie si chaque fois que $A$ se produit pour l'ensemble des conditions dans $C$, alors $D$ se produit également dans les mêmes conditions. 
 \end{block}
+\begin{itemize}
+  \item Exemple, $(\{K\} \rightarrow \{P,R\})_a$
+\end{itemize}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
@@ -893,6 +946,9 @@ $A \xlongrightarrow{C} D$
 \end{itemize}
 L'implication signifie que \emph{$A$ implique $D$ pour la totalité ou tout sous-ensemble des conditions de $C$}. Une telle implication est alors liée à la définition de l'implication triadique de Biedermann comme suit: $A \xlongrightarrow{C} D \Longleftrightarrow$  $(A \rightarrow D)_{C_1}$ pour tout $C_1 \subseteq C$, y compris pour tout élément atomique de $C$. 
 \end{block}
+\begin{itemize}
+  \item Par exemple, $\{K\} \xlongrightarrow{ad} \{P,R\}$
+\end{itemize}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
@@ -901,11 +957,41 @@ L'implication signifie que \emph{$A$ implique $D$ pour la totalité ou tout sous
 \begin{block}{Définition 21: Implication \emph{conditions attributionnels} (ACI)}
 Une implication de type conditions attributionnels (ACI) est de la forme $A \xlongrightarrow{C} D$, où $A$ et $D$ sont des sous-ensembles de $K_3$, et $C$ est un sous-ensemble de $K_2$.
 \end{block}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Implications triadiques \parencite{Ganter2004}}
 \begin{block}{Définition 22: Règle d'association d'attributs conditionnels à la Biedermann (BCAAR)}
 Une règle BCAAR $(A \rightarrow D)_C$ $[s, c]$ est vraie si chaque fois que $A \subseteq K_2$ est vraie sous l'ensemble de conditions (et non nécessairement un sous-ensemble de) $C \subseteq K_3$, alors $D \subseteq K_2$ est vraie pour $C$ avec un support $s$ et une confiance $c$.
 \end{block}
+\begin{itemize}
+  \item Par exemple, $(K \rightarrow P)_b$ $[60\%, 75\%]$
+\end{itemize}
 \end{frame}
 %------------------------------------------------
+\begin{frame}
+\frametitle{Enrichissement du module de génération des règles triadiques}
+\framesubtitle{Algorithme de calcul des implications triadiques CAI et ACI}
+En partant de la définition même d'une implication CAI qui indique que $A \xlongrightarrow{C} D$ est vraie ssi $(A \rightarrow D)_k$ pour tout $k \in C$, nous allons procéder comme suit:
+\begin{enumerate}
+	\item créer autant de contextes dyadiques qu'il y a de conditions dans $K_3$
+	\item calculer les implications à la Biedermann au niveau des chacune des conditions
+	\item placer les implications avec un même antécédent dans un même baquet (\emph{bucket}) puis décomposer chaque implication avec $p$ attributs dans la conclusion en $p$ implications avec un seul attribut dans la conséquence 
+	\item cumuler les conditions pour toutes les implications ayant le même antécédent et la même conséquence
+	\item regrouper les conclusions des implications ayant le même antécédent
+	\item calculer le support des implications obtenues.		
+\end{enumerate}
+\end{frame}
+%------------------------------------------------
+% \begin{frame}[t]{Enrichissement du module de génération des règles triadiques}
+%   \framesubtitle{Les implications triadiques dans \lm}
+%   \begin{figure}[H]
+%   \centering
+%   \includegraphics[scale=0.32]{figures/Triadic.jpg}
+%   \end{figure}
+% \end{frame}
+%--- Next Frame ---%
 \begin{frame}
 \frametitle{Enrichissement du module de génération des règles triadiques}
 \framesubtitle{Algorithme de calcul des implications triadiques CAI et ACI}
@@ -944,11 +1030,12 @@ Contributions:
 \item Production d'implications avec négation;
 \item Enrichissement du module de génération des règles triadiques;
 \item Mise à jour de Lattice Miner avec la dernière version de Java 8, support de Maven, et documentation technique;
-\item Article pour la conférence ICFCA 2017~\parencite{Missaoui2017};
+\item Article accepté dans les actes supplémentaires pour la conférence ICFCA 2017~\parencite{Missaoui2017};
 \end{itemize}
 Travaux futurs:
 \begin{itemize}
-\item Associer au module de calcul des implications (y compris celles avec négation et les implications triadiques) une autre procédure qui permet de calculer le fermé d'un groupe d'attributs $Y$ avec ou sans un ensemble $C$ de conditions;
+\item Procédure qui permet de calculer le fermé d'un groupe d'attributs $Y$ avec ou sans un ensemble $C$ de conditions;
+\item Exploiter le parallélisme dans un environement MapReduce;
 \item Version Web \emph{Lattice Miner};
 \end{itemize}
 \end{frame}
